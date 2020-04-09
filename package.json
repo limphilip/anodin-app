@@ -4,6 +4,7 @@
   "description": "Client side app for Anodin Project",
   "main": "dist/index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "build-watch": "parcel watch ./client/index.html",
     "start-watch": "nodemon server/index.js",
     "dev": "concurrently --kill-others \"tsc --watch\" \"npm run build-watch\" \"npm run start-watch\"",
