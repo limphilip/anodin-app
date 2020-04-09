@@ -1,4 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Button } from '@material-ui/core';
 
-ReactDOM.render(<h1>Hello World!</h1>, document.getElementById('root'));
+ReactDOM.render(
+  <Button variant="contained" color="primary">
+    Ben oui, un beau boutton !
+  </Button>,
+  document.getElementById('root')
+);
