@@ -6,9 +6,12 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "lib": ["es6", "dom"]
   },
-  "include": [
-    "server/*"
-  ]
+  "include": ["server/*"]
 }

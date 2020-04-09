@@ -9,12 +9,10 @@
     "dev": "concurrently --kill-others \"npm run start-watch\" \"npm run build-watch\"",
     "build": "parcel build ./client/index.html --out-dir dist --public-url ./ && tsc",
     "start": "npm run build && node ./dist/index.js",
-    "eslint": "eslint --init",
-    "typescript": "^3.8.3"
+    "eslint": "eslint --init"
   },
   "author": "FredGibeau",
   "devDependencies": {
-    "@types/express": "^4.17.5",
     "@types/react": "^16.9.33",
     "@types/react-dom": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
@@ -32,6 +30,7 @@
     "prettier": "^2.0.4"
   },
   "dependencies": {
+    "@types/express": "^4.17.5",
     "@types/node": "^13.11.1",
     "express": "^4.17.1",
     "parcel-bundler": "^1.12.4",
