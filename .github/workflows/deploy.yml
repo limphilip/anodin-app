@@ -14,18 +14,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '13.12'
-    # - name: Install yarn and run unittest
-    #   run: |
-    #     yarn
-    #     yarn test
-    #   env:
-    #     CI: true
+    - name: Install yarn and run unittest
+      run: |
+        yarn
+        yarn test
+      env:
+        CI: true
     - name: Publish to Github Packages Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
         name: limphilip/anodin-app/anodin-app-img
         registry: docker.pkg.github.com
-        username: ${{ secrets.GITHUB_USERNAME }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
         dockerfile: Dockerfile
         tags: latest
