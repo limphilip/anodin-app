@@ -1,10 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button } from '@material-ui/core';
+import {
+  Button,
+  createMuiTheme,
+  ThemeProvider,
+  CssBaseline,
+  Typography,
+  AppBar,
+} from '@material-ui/core';
 
-ReactDOM.render(
-  <Button variant="contained" color="primary">
-    Ben oui, un beau boutton !
-  </Button>,
-  document.getElementById('root')
-);
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar>
+        <Typography variant="h6">Anodin Online</Typography>
+      </AppBar>
+      <Typography style={{ marginTop: 50 }}>
+        On lâche pas l&apos;progrès... !
+      </Typography>
+    </ThemeProvider>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
