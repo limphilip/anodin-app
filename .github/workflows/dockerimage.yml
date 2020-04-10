@@ -12,7 +12,7 @@ jobs:
         - uses: actions/checkout@v1
         - name: Extract release tag
           shell: bash
-          run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/heads/})"
+          run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
           id: extract_release_tag
         - name: Login to docker.pkg.github.com
           run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ secrets.GH_USERNAME }} --password-stdin
