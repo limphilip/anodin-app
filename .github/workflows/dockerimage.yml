@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: elgohr/Publish-Docker-Github-Action@2.14
       with:
-        name: anodin-app
+        name: limphilip/anodin-app/anodin-app-img
+        registry: docker.pkg.github.com
         username: ${{ secrets.GH_USERNAME }}
         password: ${{ secrets.GITHUB_TOKEN }}
         buildargs: --tag anodin-app:$(date +%s)
