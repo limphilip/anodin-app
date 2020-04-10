@@ -14,8 +14,8 @@ jobs:
         - name: Login to DockerHub Registry
           run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ secrets.GH_USERNAME }} --password-stdin docker.pkg.github.com
         - name: Build the latest Docker image
-          run: docker build . --file Dockerfile --tag anodin-app:latest
+          run: docker build . --file Dockerfile --tag anodin-app
         - name: Tag Docker image to correspond to Github Docker registry
-          run: docker tag anodin-app:latest ${{ secrets.GH_USERNAME }}/anodin-app:latest
+          run: docker tag anodin-app docker.pkg.github.com/limphilip/anodin-app:latest
         - name: Push the latest Docker image
-          run: docker push ${{ secrets.GH_USERNAME }}/anodin-app:latest
+          run: docker push docker.pkg.github.com/limphilip/anodin-app:latest
