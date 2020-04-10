@@ -32,12 +32,12 @@ jobs:
           run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
         
         - name: Login to docker.io
-          run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login docker.io -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          run: echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
         - name : Tag Docker image with the release tag
-          run : docker tag anodin-app docker.io/${{ secrets.DOCKER_USERNAME }}/anodin-app/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
+          run : docker tag anodin-app ${{ secrets.DOCKER_USERNAME }}/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
         - name: Push the release Docker image
-          run: docker push docker.io/${{ secrets.DOCKER_USERNAME }}/anodin-app/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
+          run: docker push ${{ secrets.DOCKER_USERNAME }}/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
         - name: Tag Docker image as latest
-          run: docker tag anodin-app docker.io/${{ secrets.DOCKER_USERNAME }}/anodin-app/anodin-app:latest
+          run: docker tag anodin-app ${{ secrets.DOCKER_USERNAME }}/anodin-app:latest
         - name: Push the latest Docker image
-          run: docker push docker.io/${{ secrets.DOCKER_USERNAME }}/anodin-app/anodin-app:latest
+          run: docker push ${{ secrets.DOCKER_USERNAME }}/anodin-app:latest
