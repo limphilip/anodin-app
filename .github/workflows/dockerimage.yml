@@ -16,6 +16,6 @@ jobs:
         - name: Build the latest Docker image
           run: docker build . --file Dockerfile --tag anodin-app
         - name: Tag Docker image to correspond to Github Docker registry
-          run: docker tag IMAGE_ID docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
+          run: docker tag anodin-app docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
         - name: Push the latest Docker image
           run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
