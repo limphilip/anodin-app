@@ -12,10 +12,10 @@ jobs:
     steps:
         - uses: actions/checkout@v2
         - name: Login to DockerHub Registry
-          run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ secrets.GH_USERNAME }} --password-stdin docker.pkg.github.com
+          run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ secrets.GH_USERNAME }} --password-stdin
         - name: Build the latest Docker image
           run: docker build . --file Dockerfile --tag anodin-app
         - name: Tag Docker image to correspond to Github Docker registry
-          run: docker tag anodin-app docker.pkg.github.com/limphilip/anodin-app:latest
+          run: docker tag IMAGE_ID docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
         - name: Push the latest Docker image
-          run: docker push docker.pkg.github.com/limphilip/anodin-app:latest
+          run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
