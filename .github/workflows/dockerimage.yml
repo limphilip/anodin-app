@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Publish Docker
 
 on:
   push:
@@ -7,12 +7,12 @@ on:
     branches: [ master ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-18.04
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag anodin-app:$(date +%s)
+    - uses: elgohr/Publish-Docker-Github-Action@2.14
+      with:
+        name: anodin-app
+        username: ${{ secrets.GH_USERNAME }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        buildargs: --tag anodin-app:$(date +%s)
