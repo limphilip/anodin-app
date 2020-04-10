@@ -1,4 +1,4 @@
-name: Publish Docker
+name: Docker Image CI
 
 on:
   push:
@@ -10,10 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-    - uses: elgohr/Publish-Docker-Github-Action@2.14
-      with:
-        name: limphilip/anodin-app/anodin-app-img
-        registry: docker.pkg.github.com
-        username: ${{ secrets.GH_USERNAME }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        buildargs: --tag anodin-app:$(date +%s)
+        - uses: actions/checkout@v2
+        - name: Login to DockerHub Registry
+          run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ secrets.GH_USERNAME }} --password-stdin docker.pkg.github.com
+        - name: Build the latest Docker image
+          run: docker build . --file Dockerfile --tag limphilip/anodin-app:latest
+        - name: Push the latest Docker image
+          run: docker push limphilip/anodin-app:latest
