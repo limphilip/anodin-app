@@ -1,8 +1,9 @@
 name: Docker Image CI
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+    - '*'
 
 jobs:
   build:
@@ -21,8 +22,8 @@ jobs:
           run : docker tag anodin-app docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
         - name: Push the release Docker image
           run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
-        - name: Tag Docker image as latest
-          run: docker tag anodin-app docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
-        - name: Push the latest Docker image
-          run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
+#         - name: Tag Docker image as latest
+#           run: docker tag anodin-app docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
+#         - name: Push the latest Docker image
+#           run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
         
