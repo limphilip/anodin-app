@@ -15,7 +15,7 @@ export default function LoginCard() {
       </CardContent>
       <CardActions>
         <Button variant="contained" color="primary">
-          Brace Yourself!
+          Brace Yourself! Updated! 
         </Button>
       </CardActions>
     </Card>
