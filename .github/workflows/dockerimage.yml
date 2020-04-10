@@ -16,4 +16,4 @@ jobs:
         - name: Build the latest Docker image
           run: docker build . --file Dockerfile --tag anodin-app:latest
         - name: Push the latest Docker image
-          run: docker push anodin-app:latest
+          run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app:latest
