@@ -1,21 +1,28 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
         - uses: actions/checkout@v2
-        - name: Login to DockerHub Registry
+        - name: Extract release tag
+          shell: bash
+          run: echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/heads/})"
+          id: extract_release_tag
+        - name: Login to docker.pkg.github.com
           run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ secrets.GH_USERNAME }} --password-stdin
-        - name: Build the latest Docker image
+        - name: Build Docker image
           run: docker build . --file Dockerfile --tag anodin-app
-        - name: Tag Docker image to correspond to Github Docker registry
+        - name : Tag Docker image with the release tag
+          run : docker tag anodin-app docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
+        - name: Push the release Docker image
+          run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:${{ steps.extract_release_tag.outputs.tag }}
+        - name: Tag Docker image as latest
           run: docker tag anodin-app docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
         - name: Push the latest Docker image
           run: docker push docker.pkg.github.com/${{ secrets.GH_USERNAME }}/anodin-app/anodin-app:latest
+        
